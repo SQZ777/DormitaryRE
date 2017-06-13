@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "220";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/MyFav.ico">
+    <title>@ViewBag.Title ? Here Is!!</title>
+    @Styles.Render("~/DormitaryCSS/css")
+</head>
+
+<body>
+    <header id="header">
+        <div class="container">
+            @Html.ActionLink("Home", "Index")
+            @Html.ActionLink("點餐", "Order")
+            @Html.ActionLink("電費", "Index")
+            @Html.ActionLink("房租", "Index")
+            @Html.ActionLink("成員", "Index")
+        </div>
+    </header>
+      
+
+
+            <div class="container" style="margin-top:30px;">
+                    @RenderBody()
+                <footer>
+                    <hr />
+                    <p>&copy; @DateTime.Now.Year - Code By DZ-Ice</p>
+                </footer>
+            </div>
+
+    @*@Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+</body>
+</html>
+

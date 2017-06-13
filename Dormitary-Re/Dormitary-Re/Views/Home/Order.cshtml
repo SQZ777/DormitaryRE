@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Dormitary_Re.Models.Order>
+@{
+    ViewBag.Title = "Order";
+}
+
+<div id="Order">
+    <div class="left">
+        <img src="~/imgs/2017迷客夏價目表-北區.jpg" />
+    </div>
+
+    @using (Html.BeginForm("Submit", "Home", FormMethod.Post))
+    {
+        <div class="right">
+            <div class="OrderInform">
+                <div class="TwoInput">
+                    點餐:
+                    <input type="text" name="Product" maxlength="50" placeholder="ProductName" />
+                    <input type="number" name="HowMuch" maxlength="5" placeholder="Price" />
+                </div>
+                <br />
+                您已點: @if (ViewData["Ordered"] != null)
+                {
+                    @ViewBag.Ordered;
+                }
+                <br />
+            </div>
+            <input type="Submit" value="Submit">
+            <br />
+            <div class="Table">
+                <table border="1">
+                    <tr>
+                        <td>Name</td>
+                        <td>Ordered </td>
+                        <td>$$$$ </td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.orderaccount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.product)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    }
+</div>

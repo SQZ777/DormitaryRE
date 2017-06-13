@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "LoginIndex";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@using(Html.BeginForm("Login", "Home", FormMethod.Post)){ 
+    <div id="LoginForm">
+        <input type="text" name="account" value="" />
+        <input type="password" name="pwd" value="" />
+    </div>
+
+}
