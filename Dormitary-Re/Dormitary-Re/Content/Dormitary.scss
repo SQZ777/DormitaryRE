@@ -17,11 +17,10 @@ html {
     }
 }
 
-
-
 #header {
     display: block;
     background-color: #f5d171;
+
     .container {
         max-width: 900px;
         width: 100%;
@@ -41,20 +40,23 @@ html {
                 color: black;
             }
         }
-        .title-logo{
-            float:left;
-            width:50px;
-            margin-top:10px;
-            margin-left:200px;
-            }
-        .Login_Title{
-            float:left;
-            font-size:50px;
-            color:white;
+
+        .title-logo {
+            float: left;
+            width: 50px;
+            margin-top: 10px;
+            margin-left: 200px;
+        }
+
+        .Login_Title {
+            float: left;
+            font-size: 50px;
+            color: white;
         }
     }
 }
 
+//點餐頁面
 #Order {
     display: inline-block;
     font-size: 50px;
@@ -84,10 +86,11 @@ html {
 
             .TwoInput {
                 vertical-align: bottom;
+
                 input[type="text"], input[type="number"] {
                     vertical-align: bottom;
                     display: inline-block;
-                    width:150px;
+                    width: 150px;
                     font-size: 22px;
                     height: 24px;
                     margin-top: 0px;
@@ -115,8 +118,40 @@ html {
         .Table, tr, td {
             margin-left: 0;
             background-color: white;
-            border:0;
+            border: 0;
             border-collapse: collapse;
+        }
+    }
+}
+
+#LoginForm {
+    display: inline-block;
+    width: 100%;
+    padding:100px 0 150px 0;
+    .container {
+        max-width: 250px;
+        display: inline-block;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 30px;
+        font-size: 24px;
+        font-weight: bold;
+        .leftText{
+            float:left;
+        }
+        .account {
+            padding:3px;
+            border:1px solid gray;
+            border-radius:2px;
+            height: 24px;
+        }
+        .password {
+            padding:3px;
+            border:1px solid gray;
+            height: 24px;
+        }
+
+        .Login_Btm {
         }
     }
 }

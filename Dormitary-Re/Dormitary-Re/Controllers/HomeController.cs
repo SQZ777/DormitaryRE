@@ -9,7 +9,8 @@ namespace Dormitary_Re.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        OrderModel OM = new OrderModel();
+        OrderModel orderModel = new OrderModel();
+        LoginModel loginMdel = new LoginModel();
         public ActionResult Index()
         {
             return View();
@@ -17,7 +18,7 @@ namespace Dormitary_Re.Controllers
 
         public ActionResult Order()
         {
-            List<Order> OrderList = OM.GetOrderList().ToList();
+            List<Order> OrderList = orderModel.GetOrderList().ToList();
             foreach (var item in OrderList)
             {
                 ViewData["Ordered"] = item.price;
@@ -28,7 +29,7 @@ namespace Dormitary_Re.Controllers
         [HttpPost]
         public ActionResult Submit(string Product,int HowMuch)
         {
-            if (OM.Submit("Test", Product, HowMuch))
+            if (orderModel.Submit("Test", Product, HowMuch))
             {
                 return RedirectToAction("Order");
             }
@@ -40,6 +41,14 @@ namespace Dormitary_Re.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        public ActionResult Login(string account,string pwd)
+        {
+            if (loginMdel.Login(account, pwd))
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("LoginIndex");
+        }
     }
 }

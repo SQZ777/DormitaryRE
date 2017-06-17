@@ -40,6 +40,7 @@ namespace Dormitary_Re.Models
                 
         }
     }
+
     public partial class Order
     {
         public string product { get; set; }

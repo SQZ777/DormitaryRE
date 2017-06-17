@@ -1,14 +1,30 @@
-﻿
+﻿@model IEnumerable<Dormitary_Re.Models.LoginModel>
 @{
-    ViewBag.Title = "LoginIndex";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 
-@using(Html.BeginForm("Login", "Home", FormMethod.Post)){ 
-    <div id="LoginForm">
-        <input type="text" name="account" value="" />
-        <input type="password" name="pwd" value="" />
-    </div>
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "LoginForm" }))
+{
+    <div class="container">
 
+        <div class="leftText">
+            帳號:
+        </div>
+        <input class="account" type="text" name="account" placeholder="請輸入帳號" />
+
+
+        <div class="leftText">
+            密碼:
+        </div>
+        <input class="password" type="password" name="pwd" placeholder="請輸入密碼" />
+
+
+        <input class="Login_Btm" type="submit" value="Login" />
+    </div>
 }
+
+<script>
+
+
+</script>
