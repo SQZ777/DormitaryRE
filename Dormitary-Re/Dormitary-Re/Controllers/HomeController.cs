@@ -25,11 +25,11 @@ namespace Dormitary_Re.Controllers
             }
             return View(OrderList);
         }
-
+        enum Ordering { wantorder=1,dontwantorder=0};
         [HttpPost]
         public ActionResult Submit(string Product,int HowMuch)
         {
-            if (orderModel.Submit("Test", Product, HowMuch))
+            if (orderModel.Submit("Test", Product, HowMuch,(int)Ordering.wantorder))
             {
                 return RedirectToAction("Order");
             }
