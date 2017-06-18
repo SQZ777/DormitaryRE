@@ -127,31 +127,68 @@ html {
 #LoginForm {
     display: inline-block;
     width: 100%;
-    padding:100px 0 150px 0;
+    padding: 100px 0 150px 0;
+
     .container {
         max-width: 250px;
         display: inline-block;
         border: 1px solid gray;
         border-radius: 5px;
-        padding: 30px;
+        padding: 30px 30px 20px 30px;
         font-size: 24px;
         font-weight: bold;
-        .leftText{
-            float:left;
+
+        .leftText {
+            float: left;
+            margin-bottom: 15px;
         }
+
         .account {
-            padding:3px;
-            border:1px solid gray;
-            border-radius:2px;
+            padding: 3px;
+            border: 1px solid gray;
+            border-radius: 2px;
             height: 24px;
+            margin-bottom: 15px;
         }
+
         .password {
-            padding:3px;
-            border:1px solid gray;
+            padding: 3px;
+            border: 1px solid gray;
             height: 24px;
         }
 
         .Login_Btm {
+            margin-top: 15px;
+            margin-right: 15px;
+            padding: 5px;
+            float: right;
+            font-family: 'Microsoft JhengHei';
+            font-weight:bold;
+            border: 1px solid #bebebe;
+            color: white;
+            background-color: #ffdb7a;
+            transition:all .3s;
+            border-radius:3px;
+            cursor:pointer;
+            &:hover{
+                background-color:#e5c571;
+            }
+        }
+        .Register{
+            text-decoration:none;
+            display:inline-block;
+            font-family: 'Microsoft JhengHei';
+            font-weight:normal;
+            font-size:15px;
+            float:right;
+            margin-top: 20px;
+            margin-right: 10px;
+            color:#bebebe;
+            cursor:pointer;
+            &:hover{
+            color:black;
+            text-decoration:underline;
+            }
         }
     }
 }
