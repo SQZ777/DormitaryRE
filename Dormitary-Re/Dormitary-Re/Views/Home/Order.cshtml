@@ -18,9 +18,15 @@
                     <input type="number" name="HowMuch" maxlength="5" placeholder="Price" />
                 </div>
                 <br />
-                您已點: @if (ViewData["Ordered"] != null)
+                您已點:
+                @foreach (var item in Model)
                 {
-                    @ViewBag.Ordered;
+                    if (item.orderaccount.ToUpper() == Session["account"].ToString().ToUpper())
+                    {
+                        <a>
+                            @Html.DisplayFor(a => item.product)
+                        </a>
+                    }
                 }
                 <br />
             </div>

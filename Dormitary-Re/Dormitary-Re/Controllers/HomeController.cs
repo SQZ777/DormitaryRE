@@ -52,7 +52,7 @@ namespace Dormitary_Re.Controllers
             Session.Clear();
             if (loginMdel.Login(account, pwd))
             {
-                Session["Account"] = account;
+                Session["account"] = account;
                 return RedirectToAction("Index");
             }
             return RedirectToAction("LoginIndex");
