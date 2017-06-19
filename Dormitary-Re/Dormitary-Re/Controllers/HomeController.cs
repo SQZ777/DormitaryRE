@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dormitary_Re.Models;
+using Dormitary_Re.Filter;
+
 namespace Dormitary_Re.Controllers
 {
     public class HomeController : Controller
@@ -11,11 +13,13 @@ namespace Dormitary_Re.Controllers
         // GET: Home
         OrderModel orderModel = new OrderModel();
         LoginModel loginMdel = new LoginModel();
+        [FilterPermission]
         public ActionResult Index()
         {
             return View();
         }
 
+        [FilterPermission]
         public ActionResult Order()
         {
             List<Order> OrderList = orderModel.GetOrderList().ToList();
@@ -25,11 +29,12 @@ namespace Dormitary_Re.Controllers
             }
             return View(OrderList);
         }
-        enum Ordering { wantorder=1,dontwantorder=0};
+        enum Ordering { wantorder = 1, dontwantorder = 0 };
         [HttpPost]
-        public ActionResult Submit(string Product,int HowMuch)
+        [FilterPermission]
+        public ActionResult Submit(string Product, int HowMuch)
         {
-            if (orderModel.Submit("Test", Product, HowMuch,(int)Ordering.wantorder))
+            if (orderModel.Submit(Session["Account"].ToString(), Product, HowMuch, (int)Ordering.wantorder))
             {
                 return RedirectToAction("Order");
             }
@@ -42,10 +47,13 @@ namespace Dormitary_Re.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string account,string pwd)
+        [FilterPermission]
+        public ActionResult Login(string account, string pwd)
         {
+            Session.Clear();
             if (loginMdel.Login(account, pwd))
             {
+                Session["Account"] = account;
                 return RedirectToAction("Index");
             }
             return RedirectToAction("LoginIndex");
