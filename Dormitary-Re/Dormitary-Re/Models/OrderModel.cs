@@ -6,7 +6,12 @@ using System.Linq;
 
 namespace Dormitary_Re.Models
 {
-    public class OrderModel
+
+   public interface ISetAllOrdering
+    {
+        bool SetAllOrdering(int Status);
+    }
+    public class OrderModel : ISetAllOrdering
     {
         public virtual List<Order> GetOrderList()
         {
@@ -15,7 +20,7 @@ namespace Dormitary_Re.Models
                 return cn.Query<Order>("select * from orders where ordering=1").ToList();
             }
         }
-        public virtual bool Submit(string ordername,string Product,int price,int ordering)
+        public virtual bool Submit(string ordername, string Product, int price, int ordering)
         {
             try
             {
@@ -38,7 +43,19 @@ namespace Dormitary_Re.Models
             {
                 return false;
             }
-                
+        }
+        public bool SetAllOrdering(int Status)
+        {
+            using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                string sqlCommand = "Update orders SET ordering = 1 where ordering != 1";
+                if (Status == 0)
+                {
+                    sqlCommand = "Update orders SET ordering = 0 where ordering != 0";
+                }
+                cn.Execute(sqlCommand);
+            }
+            return false;
         }
     }
 

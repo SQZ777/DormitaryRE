@@ -45,6 +45,12 @@ namespace Dormitary_Re.Controllers
         {
             return View();
         }
+        enum OrderingStatus{Ordering=1,NotOrdering=0}
+        public ActionResult SetAllProductOrderingStatus()
+        {
+            orderModel.SetAllOrdering((int)OrderingStatus.NotOrdering);
+            return RedirectToAction("Order");
+        }
 
         [HttpPost]
         public ActionResult Login(string account, string pwd)

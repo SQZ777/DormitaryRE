@@ -3,7 +3,7 @@ using Dormitary_Re.Models;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-
+using Dormitary_Re.Models;
 namespace Dormitary_Re.Tests
 {
     [TestClass]
@@ -78,6 +78,33 @@ namespace Dormitary_Re.Tests
                 return 0;
             }
         }
+
+        [TestMethod]
+        public void TestSetAllOrderingTo1()
+        {
+            //arrange
+            SetAllOrderingTest saot = new SetAllOrderingTest();
+            //act
+            var actual = saot.SetAllOrdering(1);
+            //assert
+            Assert.IsTrue(actual);
+
+        }
+    }
+    class SetAllOrderingTest : ISetAllOrdering
+    {
+        public bool SetAllOrdering(int Status)
+        {
+            if (Status == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
     class OrderModelFake : OrderModel
     {

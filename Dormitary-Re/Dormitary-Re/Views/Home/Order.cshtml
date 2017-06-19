@@ -33,7 +33,7 @@
             <input type="Submit" value="Submit">
             <br />
             <div class="Table">
-                <table border="1">
+                <table border=1>
                     <tr>
                         <td>Name</td>
                         <td>Ordered </td>
@@ -54,6 +54,9 @@
                         </tr>
                     }
                 </table>
+                <div class="SetAllOrderBtn">
+                    @Html.ActionLink("收單", "SetAllProductOrderingStatus")
+                </div>
             </div>
         </div>
     }
