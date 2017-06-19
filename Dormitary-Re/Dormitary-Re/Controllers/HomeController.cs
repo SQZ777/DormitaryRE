@@ -47,7 +47,6 @@ namespace Dormitary_Re.Controllers
         }
 
         [HttpPost]
-        [FilterPermission]
         public ActionResult Login(string account, string pwd)
         {
             Session.Clear();
