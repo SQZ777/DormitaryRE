@@ -84,7 +84,8 @@ html {
         background-color: #18534e;
         cursor: pointer; }
     #Order .right .Table {
-      display: inline-block; }
+      display: inline-block;
+      width: 100%; }
       #Order .right .Table .SetAllOrderBtn {
         margin-top: 10px; }
         #Order .right .Table .SetAllOrderBtn a {
@@ -98,7 +99,8 @@ html {
           #Order .right .Table .SetAllOrderBtn a:hover {
             background-color: #e5c571; }
     #Order .right .Table, #Order .right tr, #Order .right td {
-      background-color: white;
+      width: 500px;
+      background-color: none;
       border: 0;
       border-collapse: collapse; }
 

@@ -34,11 +34,14 @@
             <br />
             <div class="Table">
                 <table border=1>
-                    <tr>
-                        <td>Name</td>
-                        <td>Ordered </td>
-                        <td>$$$$ </td>
-                    </tr>
+                    @if (Model.Count() > 0)
+                    {
+                        <tr>
+                            <td>Name</td>
+                            <td>Ordered </td>
+                            <td>$$$$ </td>
+                        </tr>
+                    }
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -54,9 +57,12 @@
                         </tr>
                     }
                 </table>
-                <div class="SetAllOrderBtn">
-                    @Html.ActionLink("收單", "SetAllProductOrderingStatus")
-                </div>
+                @if (Model.Count() > 0)
+                {
+                    <div class="SetAllOrderBtn">
+                        @Html.ActionLink("收單", "SetAllProductOrderingStatus")
+                    </div>
+                }
             </div>
         </div>
     }

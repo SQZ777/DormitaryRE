@@ -119,6 +119,7 @@ html {
         
         .Table {
             display: inline-block;
+            width:100%;
             .SetAllOrderBtn {
                 margin-top: 10px;
                 a {
@@ -137,9 +138,9 @@ html {
         }
 
         .Table, tr, td {
-            background-color: white;
+            width:500px;
+            background-color: none;
             border: 0;
-            
             border-collapse: collapse;
         }
     }
