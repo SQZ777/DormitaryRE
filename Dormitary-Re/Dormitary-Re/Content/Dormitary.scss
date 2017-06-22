@@ -98,7 +98,9 @@ html {
             }
         }
 
-        input[type="submit"] {
+        input[type="submit"] 
+        {
+            
             color: white;
             text-align: center;
             background-color: #44b7ad;
@@ -107,18 +109,37 @@ html {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             width: 125px;
             height: 30px;
-            margin-bottom: 10px;
+            margin: 20px 0px 20px 0px;
 
             &:hover {
                 background-color: #18534e;
                 cursor: pointer;
             }
         }
-           
+        
+        .Table {
+            display: inline-block;
+            .SetAllOrderBtn {
+                margin-top: 10px;
+                a {
+                    font-weight:bold;
+                    color: white;
+                    padding: 5px 10px 5px 10px;
+                    border: 1px solid black;
+                    border-radius:4px;
+                    background-color: #f5d171;
+                    text-decoration-line: none;
+                    &:hover{
+                    background-color: #e5c571;
+                    }
+                }
+            }
+        }
+
         .Table, tr, td {
-            margin-left: 0;
             background-color: white;
             border: 0;
+            
             border-collapse: collapse;
         }
     }
@@ -163,31 +184,34 @@ html {
             padding: 5px;
             float: right;
             font-family: 'Microsoft JhengHei';
-            font-weight:bold;
+            font-weight: bold;
             border: 1px solid #bebebe;
             color: white;
             background-color: #ffdb7a;
-            transition:all .3s;
-            border-radius:3px;
-            cursor:pointer;
-            &:hover{
-                background-color:#e5c571;
+            transition: all .3s;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e5c571;
             }
         }
-        .Register{
-            text-decoration:none;
-            display:inline-block;
+
+        .Register {
+            text-decoration: none;
+            display: inline-block;
             font-family: 'Microsoft JhengHei';
-            font-weight:normal;
-            font-size:15px;
-            float:right;
+            font-weight: normal;
+            font-size: 15px;
+            float: right;
             margin-top: 20px;
             margin-right: 10px;
-            color:#bebebe;
-            cursor:pointer;
-            &:hover{
-            color:black;
-            text-decoration:underline;
+            color: #bebebe;
+            cursor: pointer;
+
+            &:hover {
+                color: black;
+                text-decoration: underline;
             }
         }
     }
