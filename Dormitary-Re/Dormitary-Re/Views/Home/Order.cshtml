@@ -33,32 +33,31 @@
             <input type="Submit" value="Submit">
             <br />
             <div class="Table">
-                <table border=1>
-                    @if (Model.Count() > 0)
-                    {
+
+                @if (Model.Count() > 0)
+                {
+                    <table border=1>
                         <tr>
                             <td>Name</td>
                             <td>Ordered </td>
                             <td>$$$$ </td>
                         </tr>
-                    }
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.orderaccount)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.product)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.price)
-                            </td>
-                        </tr>
-                    }
-                </table>
-                @if (Model.Count() > 0)
-                {
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.orderaccount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.price)
+                                </td>
+                            </tr>
+                        }
+                    </table>
                     <div class="SetAllOrderBtn">
                         @Html.ActionLink("收單", "SetAllProductOrderingStatus")
                     </div>
