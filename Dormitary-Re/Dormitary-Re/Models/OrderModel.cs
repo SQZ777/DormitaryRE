@@ -7,7 +7,7 @@ using System.Linq;
 namespace Dormitary_Re.Models
 {
 
-   public interface ISetAllOrdering
+    public interface ISetAllOrdering
     {
         bool SetAllOrdering(int Status);
     }
@@ -24,20 +24,17 @@ namespace Dormitary_Re.Models
         {
             try
             {
-                using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+                string sqlCommand = "Insert Into orders(price,orderaccount,product,ordertime,ordering) VALUES(@price,@orderaccount,@product,@ordertime,@ordering)";
+                var ordered = new Order()
                 {
-                    string sqlCommand = "Insert Into orders(price,orderaccount,product,ordertime,ordering) VALUES(@price,@orderaccount,@product,@ordertime,@ordering)";
-                    var ordered = new Order()
-                    {
-                        price = price,
-                        orderaccount = ordername,
-                        product = Product,
-                        ordertime = System.DateTime.Now,
-                        ordering = ordering
-                    };
-                    cn.Execute(sqlCommand, ordered);
-                    return true;
-                }
+                    price = price,
+                    orderaccount = ordername,
+                    product = Product,
+                    ordertime = System.DateTime.Now,
+                    ordering = ordering
+                };
+                ExecuteSQLForOrders<Order>(sqlCommand, ordered);
+                return true;
             }
             catch (Exception)
             {
@@ -46,16 +43,20 @@ namespace Dormitary_Re.Models
         }
         public bool SetAllOrdering(int Status)
         {
+            string sqlCommand = "Update orders SET ordering = 1 where ordering != 1";
+            if (Status == 0)
+            {
+                sqlCommand = "Update orders SET ordering = 0 where ordering != 0";
+            }
+            ExecuteSQLForOrders<Order>(sqlCommand, null);
+            return false;
+        }
+        public void ExecuteSQLForOrders<T>(string sql, object param)
+        {
             using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
-                string sqlCommand = "Update orders SET ordering = 1 where ordering != 1";
-                if (Status == 0)
-                {
-                    sqlCommand = "Update orders SET ordering = 0 where ordering != 0";
-                }
-                cn.Execute(sqlCommand);
+                cn.Query<T>(sql, param);
             }
-            return false;
         }
     }
 
