@@ -161,6 +161,7 @@
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Home\LoginIndex.cshtml" />
+    <Content Include="Views\Home\HistoryPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

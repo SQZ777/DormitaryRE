@@ -1,0 +1,14 @@
+﻿@model Dormitary_Re.Models.OrderAndHistory
+@{
+    ViewBag.Title = "HistoryPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HistoryPage</h2>
+
+@foreach (var item in Model.finishorder)
+{
+    <a>
+        @Html.DisplayFor(m=>item.finalPrice)
+    </a>
+}

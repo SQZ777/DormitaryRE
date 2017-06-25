@@ -10,14 +10,22 @@ namespace Dormitary_Re.Models
 
     public interface ISetAllOrdering
     {
-        bool SetAllOrdering(int Status);
+        void SetAllOrdering(int Status);
+        void InsertFinshOrder(string account, int finalprice);
+        void UpdateFinishedOrders(int FinishOrder);
+        int GetLatestIDFromFinishOrder();
+
     }
     public class OrderModel : ISetAllOrdering
     {
         public virtual List<Order> GetOrderList(int ordering)
         {
+            return ExecuteSQL<Order>("select * from orders where ordering=@ordering", new { ordering = ordering }).ToList();
+        }
 
-            return GetOrderLsitForOrdering<Order>("select * from orders where ordering=@ordering", new { ordering = ordering}).ToList();
+        public virtual List<FinishedOrders> GetFinishedOrdersList()
+        {
+            return ExecuteSQL<FinishedOrders>("select * from FinishedOrders", null).ToList();
         }
 
         public virtual bool Submit(string ordername, string Product, int price, int ordering)
@@ -31,26 +39,56 @@ namespace Dormitary_Re.Models
                 ordertime = DateTime.Now,
                 ordering = ordering
             };
-            ExecuteSQLForOrders<Order>(sqlCommand, ordered);
+            ExecuteSQL<Order>(sqlCommand, ordered);
+
             return true;
         }
 
-        public bool SetAllOrdering(int Status)
+        public int GetFinalPrice(List<Order> OrderList, int Ordering)
         {
-            string sqlCommand = "Update orders SET ordering = 1 where ordering != @Status";
-            ExecuteSQLForOrders<Order>(sqlCommand, new { Status = Status });
-            return false;
-        }
-
-
-        public void ExecuteSQLForOrders<T>(string sql, object param)
-        {
-            using (var cn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            int FinalPrice = 0;
+            foreach (var item in OrderList)
             {
-                cn.Query<T>(sql, param);
+                if (item.ordering == Ordering)
+                {
+                    FinalPrice += item.price;
+                }
             }
+            return FinalPrice;
         }
-        public IEnumerable<T> GetOrderLsitForOrdering<T>(string sql, object param)
+
+        public void SetAllOrdering(int Status)
+        {
+            string sqlCommand = "Update orders SET ordering = @Status where ordering != @Status";
+            ExecuteSQL<Order>(sqlCommand, new { Status = Status });
+            
+        }
+
+        public void UpdateFinishedOrders(int finishedorders)
+        {
+            string sqlCommand = "Update orders SET finishedorders = @finishedorders where finishedorders is NULL";
+            ExecuteSQL<Order>(sqlCommand, new { finishedorders = finishedorders });
+        }
+
+        public void InsertFinshOrder(string account, int finalprice)
+        {
+            string sqlCommand = "Insert into FinishedOrders(finalPrice,whoFinished,finishtime) VALUES(@finalPrice,@whoFinished,@finishtime)";
+            FinishedOrders fo = new FinishedOrders
+            {
+                finalPrice = finalprice,
+                whoFinished = account,
+                finishtime = DateTime.Now
+            };
+            ExecuteSQL<FinishedOrders>(sqlCommand, fo);
+        }
+
+        public int GetLatestIDFromFinishOrder()
+        {
+            return ExecuteSQL<FinishedOrders>("select * from FinishedOrders",null).LastOrDefault().Id;
+        }
+
+
+        public IEnumerable<T> ExecuteSQL<T>(string sql, object param)
         {
             using (var cn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
@@ -59,6 +97,13 @@ namespace Dormitary_Re.Models
         }
 
     }
+    public partial class FinishedOrders
+    {
+        public int Id { get; set; }
+        public int finalPrice { get; set; }
+        public string whoFinished { get; set; }
+        public DateTime finishtime { get; set; }
+    }
     public partial class Order
     {
         public string product { get; set; }
@@ -66,5 +111,11 @@ namespace Dormitary_Re.Models
         public int price { get; set; }
         public string orderaccount { get; set; }
         public int ordering { get; set; }
+        public int finishedorders { get; set; }
+    }
+    public partial class OrderAndHistory
+    {
+        public IEnumerable<Order> order { get; set; }
+        public IEnumerable<FinishedOrders> finishorder { get; set; }
     }
 }

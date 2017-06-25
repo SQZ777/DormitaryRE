@@ -21,7 +21,7 @@ namespace Dormitary_Re.Tests
             OrderModelFake omF = new OrderModelFake();
             //act
             List<Order> ActualData = new List<Order>();
-            ActualData = omF.GetOrderList();
+            ActualData = omF.GetOrderList(1);
             //assert
             Equals(ExceptedData, ActualData);
         }
@@ -78,37 +78,11 @@ namespace Dormitary_Re.Tests
                 return 0;
             }
         }
-
-        [TestMethod]
-        public void TestSetAllOrderingTo1()
-        {
-            //arrange
-            SetAllOrderingTest saot = new SetAllOrderingTest();
-            //act
-            var actual = saot.SetAllOrdering(1);
-            //assert
-            Assert.IsTrue(actual);
-
-        }
     }
-    class SetAllOrderingTest : ISetAllOrdering
-    {
-        public bool SetAllOrdering(int Status)
-        {
-            if (Status == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
-    }
     class OrderModelFake : OrderModel
     {
-        public override List<Order> GetOrderList()
+        public override List<Order> GetOrderList(int ordering)
         {
             DateTime dt = new DateTime(2017, 01, 01, 5, 5, 5);
             return new List<Order>() {
