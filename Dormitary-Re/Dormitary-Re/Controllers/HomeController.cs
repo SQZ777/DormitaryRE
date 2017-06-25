@@ -19,14 +19,11 @@ namespace Dormitary_Re.Controllers
             return View();
         }
 
+        enum getOrderList { ordering = 1, Notordering = 0 }
         [FilterPermission]
         public ActionResult Order()
         {
-            List<Order> OrderList = orderModel.GetOrderList().ToList();
-            foreach (var item in OrderList)
-            {
-                ViewData["Ordered"] = item.price;
-            }
+            List<Order> OrderList = orderModel.GetOrderList((int)getOrderList.ordering).ToList();
             return View(OrderList);
         }
         enum Ordering { wantorder = 1, dontwantorder = 0 };
@@ -45,7 +42,8 @@ namespace Dormitary_Re.Controllers
         {
             return View();
         }
-        enum OrderingStatus{Ordering=1,NotOrdering=0}
+
+        enum OrderingStatus { Ordering = 1, NotOrdering = 0 }
         public ActionResult SetAllProductOrderingStatus()
         {
             orderModel.SetAllOrdering((int)OrderingStatus.NotOrdering);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web.Configuration;
 
 namespace Dormitary_Re.Models
 {
@@ -13,53 +14,51 @@ namespace Dormitary_Re.Models
     }
     public class OrderModel : ISetAllOrdering
     {
-        public virtual List<Order> GetOrderList()
+        public virtual List<Order> GetOrderList(int ordering)
         {
-            using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
-            {
-                return cn.Query<Order>("select * from orders where ordering=1").ToList();
-            }
+
+            return GetOrderLsitForOrdering<Order>("select * from orders where ordering=@ordering", new { ordering = ordering}).ToList();
         }
+
         public virtual bool Submit(string ordername, string Product, int price, int ordering)
         {
-            try
+            string sqlCommand = "Insert Into orders(price,orderaccount,product,ordertime,ordering) VALUES(@price,@orderaccount,@product,@ordertime,@ordering)";
+            var ordered = new Order()
             {
-                string sqlCommand = "Insert Into orders(price,orderaccount,product,ordertime,ordering) VALUES(@price,@orderaccount,@product,@ordertime,@ordering)";
-                var ordered = new Order()
-                {
-                    price = price,
-                    orderaccount = ordername,
-                    product = Product,
-                    ordertime = System.DateTime.Now,
-                    ordering = ordering
-                };
-                ExecuteSQLForOrders<Order>(sqlCommand, ordered);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                price = price,
+                orderaccount = ordername,
+                product = Product,
+                ordertime = DateTime.Now,
+                ordering = ordering
+            };
+            ExecuteSQLForOrders<Order>(sqlCommand, ordered);
+            return true;
         }
+
         public bool SetAllOrdering(int Status)
         {
-            string sqlCommand = "Update orders SET ordering = 1 where ordering != 1";
-            if (Status == 0)
-            {
-                sqlCommand = "Update orders SET ordering = 0 where ordering != 0";
-            }
-            ExecuteSQLForOrders<Order>(sqlCommand, null);
+            string sqlCommand = "Update orders SET ordering = 1 where ordering != @Status";
+            ExecuteSQLForOrders<Order>(sqlCommand, new { Status = Status });
             return false;
         }
+
+
         public void ExecuteSQLForOrders<T>(string sql, object param)
         {
-            using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            using (var cn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 cn.Query<T>(sql, param);
             }
         }
-    }
+        public IEnumerable<T> GetOrderLsitForOrdering<T>(string sql, object param)
+        {
+            using (var cn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                return cn.Query<T>(sql, param);
+            }
+        }
 
+    }
     public partial class Order
     {
         public string product { get; set; }
@@ -68,5 +67,4 @@ namespace Dormitary_Re.Models
         public string orderaccount { get; set; }
         public int ordering { get; set; }
     }
-
 }
