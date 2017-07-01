@@ -21,18 +21,19 @@
             @Html.ActionLink("電費", "Index")
             @Html.ActionLink("房租", "Index")
             @Html.ActionLink("成員", "Index")
+            @Html.ActionLink("登出", "Logout",null,new {@class="Logout"})
         </div>
     </header>
-      
 
 
-            <div class="containerOut" style="margin-top:30px;">
-                    @RenderBody()
-                <footer>
-                    <hr />
-                    <p>&copy; @DateTime.Now.Year - Code By DZ-Ice</p>
-                </footer>
-            </div>
+
+    <div class="containerOut" style="margin-top:30px;">
+        @RenderBody()
+        <footer>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Code By DZ-Ice</p>
+        </footer>
+    </div>
 
     @*@Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")

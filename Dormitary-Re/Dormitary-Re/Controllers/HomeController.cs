@@ -41,6 +41,12 @@ namespace Dormitary_Re.Controllers
         {
             return View();
         }
+        
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("LoginIndex");
+        }
 
         enum OrderingStatus { Ordering = 1, NotOrdering = 0 }
         public ActionResult SetAllProductOrderingStatus()
@@ -52,6 +58,7 @@ namespace Dormitary_Re.Controllers
             return RedirectToAction("Order");
         }
 
+        [FilterPermission]
         public ActionResult HistoryPage()
         {
             OrderAndHistory oah = new OrderAndHistory

@@ -17,16 +17,14 @@ html {
   display: block;
   background-color: #f5d171; }
   #header .container {
-    max-width: 900px;
     width: 100%;
     display: inline-block;
     max-height: 950px; }
     #header .container > a {
-      display: inline-block;
-      width: calc(100%/6);
+      display: inline;
       color: white;
-      font-size: 30px;
-      padding: 15px 0;
+      font-size: 3em;
+      padding: 20px;
       text-decoration-line: none;
       transition: all .3s; }
       #header .container > a:hover {
@@ -40,6 +38,9 @@ html {
       float: left;
       font-size: 50px;
       color: white; }
+    #header .container .Logout {
+      font-size: 1.5em;
+      float: right; }
 
 #Order {
   display: inline-block;
