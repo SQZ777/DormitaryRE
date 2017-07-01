@@ -185,3 +185,19 @@ html {
         color: black;
         text-decoration: underline; }
 
+#HistoryData {
+  max-width: 1100px;
+  display: inline-block; }
+  #HistoryData .HistoryTable {
+    border-collapse: collapse;
+    width: 100%; }
+    #HistoryData .HistoryTable tbody {
+      border-bottom: 1px solid #b0b0b0;
+      border-top: 1px solid #b0b0b0; }
+      #HistoryData .HistoryTable tbody .Products {
+        background-color: #F9F9F9;
+        border-radius: 10px; }
+        #HistoryData .HistoryTable tbody .Products:hover {
+          transition: .3s;
+          background-color: #d5d5d5; }
+

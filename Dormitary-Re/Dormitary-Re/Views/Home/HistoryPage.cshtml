@@ -6,9 +6,48 @@
 
 <h2>HistoryPage</h2>
 
-@foreach (var item in Model.finishorder)
-{
-    <a>
-        @Html.DisplayFor(m=>item.finalPrice)
-    </a>
-}
+<div id="HistoryData">
+    <table class="HistoryTable" cellpadding="10" border="0">
+
+        @foreach (var finishorder in Model.finishorder)
+        {
+            bool Title = false;
+
+            foreach (var order in Model.order)
+            {
+                if (order.finishedorders == finishorder.Id)
+                {
+                    if (!Title)
+                    {
+                        <thead>
+                            <tr class="TitleInform">
+                                <td>
+                                    @Html.DisplayFor(m => finishorder.finishtime)
+                                </td>
+                            </tr>
+                            <tr class="Title">
+                                <td>Name</td>
+                                <td>Product</td>
+                                <td>Money</td>
+                            </tr>
+                        </thead>
+                        Title = true;
+                    }
+                    <tbody>
+                        <tr class="Products">
+                            <td>
+                                @Html.DisplayFor(m => order.orderaccount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => order.product)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => order.price)
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            }
+        }
+    </table>
+</div>

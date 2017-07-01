@@ -14,7 +14,6 @@ namespace Dormitary_Re.Models
         void InsertFinshOrder(string account, int finalprice);
         void UpdateFinishedOrders(int FinishOrder);
         int GetLatestIDFromFinishOrder();
-
     }
     public class OrderModel : ISetAllOrdering
     {
@@ -95,7 +94,6 @@ namespace Dormitary_Re.Models
                 return cn.Query<T>(sql, param);
             }
         }
-
     }
     public partial class FinishedOrders
     {
