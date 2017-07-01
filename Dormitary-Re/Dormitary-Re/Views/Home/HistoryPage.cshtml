@@ -21,8 +21,14 @@
                     {
                         <thead>
                             <tr class="TitleInform">
+                                <td> 
+                                    收單時間：@Html.DisplayFor(m => finishorder.finishtime)
+                                </td>
                                 <td>
-                                    @Html.DisplayFor(m => finishorder.finishtime)
+                                    收單者：@Html.DisplayFor(m => finishorder.whoFinished)
+                                </td>
+                                <td>
+                                    總價：@Html.DisplayFor(m => finishorder.finalPrice)
                                 </td>
                             </tr>
                             <tr class="Title">
