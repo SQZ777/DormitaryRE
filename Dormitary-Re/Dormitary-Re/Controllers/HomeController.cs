@@ -18,7 +18,7 @@ namespace Dormitary_Re.Controllers
         {
             return View();
         }
-        
+
         [FilterPermission]
         public ActionResult Order()
         {
@@ -51,16 +51,18 @@ namespace Dormitary_Re.Controllers
             orderModel.UpdateFinishedOrders(orderModel.GetLatestIDFromFinishOrder());
             return RedirectToAction("Order");
         }
-        
+
         public ActionResult HistoryPage()
         {
-            OrderAndHistory oah = new OrderAndHistory {
-                order= orderModel.GetOrderList((int)OrderingStatus.NotOrdering).ToList(),
+            OrderAndHistory oah = new OrderAndHistory
+            {
+                order = orderModel.GetOrderList((int)OrderingStatus.NotOrdering).ToList(),
                 finishorder = orderModel.GetFinishedOrdersList().ToList()
             };
+            oah.finishorder = oah.finishorder.OrderByDescending(m => m.finishtime);
             return View(oah);
         }
-        
+
 
         [HttpPost]
         public ActionResult Login(string account, string pwd)

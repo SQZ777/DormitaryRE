@@ -12,8 +12,8 @@
         @foreach (var finishorder in Model.finishorder)
         {
             bool Title = false;
-
-            foreach (var order in Model.order)
+            
+            foreach (var order in Model.order.Reverse())
             {
                 if (order.finishedorders == finishorder.Id)
                 {
