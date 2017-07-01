@@ -17,9 +17,8 @@ html {
   display: block;
   background-color: #f5d171; }
   #header .container {
-    width: 100%;
     display: inline-block;
-    max-height: 950px; }
+    max-height: 1100px; }
     #header .container > a {
       display: inline;
       color: white;
@@ -29,15 +28,14 @@ html {
       transition: all .3s; }
       #header .container > a:hover {
         color: black; }
-    #header .container .title-logo {
-      float: left;
-      width: 50px;
-      margin-top: 10px;
-      margin-left: 200px; }
-    #header .container .Login_Title {
-      float: left;
+    #header .container .Login_Title .title-txt {
+      display: inline-block;
       font-size: 50px;
       color: white; }
+    #header .container .Login_Title .title-logo {
+      margin-top: 10px;
+      width: 50px;
+      float: left; }
     #header .container .Logout {
       font-size: 1.5em;
       float: right; }

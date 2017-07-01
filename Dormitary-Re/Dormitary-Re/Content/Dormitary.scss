@@ -22,10 +22,9 @@ html {
     background-color: #f5d171;
 
     .container {
-        width: 100%;
         display: inline-block;
-        max-height: 950px;
-        
+        max-height: 1100px;
+
         > a {
             display: inline;
             color: white;
@@ -33,26 +32,29 @@ html {
             padding: 20px;
             text-decoration-line: none;
             transition: all .3s;
+
             &:hover {
                 color: black;
             }
         }
 
-        .title-logo {
-            float: left;
-            width: 50px;
-            margin-top: 10px;
-            margin-left: 200px;
-        }
 
         .Login_Title {
-            float: left;
+            .title-txt{
+            display: inline-block;
             font-size: 50px;
             color: white;
+            }
+            .title-logo {
+                margin-top:10px;
+                width: 50px;
+                float:left; //margin-top的不乖
+            }
         }
-        .Logout{
-            font-size:1.5em;
-            float:right;
+
+        .Logout {
+            font-size: 1.5em;
+            float: right;
         }
     }
 }
@@ -275,13 +277,15 @@ html {
         tbody {
             border-bottom: 1px solid #b0b0b0;
             border-top: 1px solid #b0b0b0;
+
             .Products {
                 background-color: #F9F9F9;
                 border-radius: 10px;
-            &:hover{
-                transition:.3s;
-                background-color: #d5d5d5;
-            }
+
+                &:hover {
+                    transition: .3s;
+                    background-color: #d5d5d5;
+                }
             }
         }
     }
