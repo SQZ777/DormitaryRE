@@ -9,9 +9,9 @@ namespace Dormitary_Re.App_Start
     {
         public static void RegisterBundles(BundleCollection Bundles)
         {
-            //Bundles.Add(new ScriptBundle("~/DormitaryJS").Include(
-            //    "~/DormJS/"
-            //    ));
+            Bundles.Add(new ScriptBundle("~/DormitaryJS/JS").Include(
+                "~/Scripts/jquery-3.1.1.js","~/Scripts/vue.js", "~/Scripts/AfterLoginPages.js"
+                ));
             Bundles.Add(new StyleBundle("~/DormitaryCSS/css").Include(
                 "~/Content/Dormitary.css"
                 ));

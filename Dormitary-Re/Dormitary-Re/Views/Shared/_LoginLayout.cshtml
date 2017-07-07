@@ -16,10 +16,11 @@
 <body>
     <header id="header">
         <div class="container">
-
             <div class="Login_Title">
                 <img class="title-logo" src="~/imgs/220Dormitary-04.png" />
-                <div class="title-txt">貳貳零-自強路最強宿舍</div>
+                <div class="title-txt">
+                    貳貳零-自強路最強宿舍
+                </div>
             </div>
         </div>
     </header>
@@ -31,6 +32,8 @@
         </footer>
     </div>
 
+    @Scripts.Render("~/DormitaryJS/JS")
+    @RenderSection("scripts", required: false)
     @*@Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")

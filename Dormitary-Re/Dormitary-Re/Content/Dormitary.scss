@@ -1,5 +1,40 @@
 ﻿$whites: #FFFFFF;
 
+@-moz-keyframes UpAndDown{
+    0%{
+        margin-top:0px;
+    }
+    50%{
+        margin-top:50px;
+    }
+    100%{
+        margin-top:0px;
+    }
+}
+
+@-webkit-keyframes UpAndDown{
+    0%{
+        margin-top:0px;
+    }
+    50%{
+        margin-top:50px;
+    }
+    100%{
+        margin-top:0px;
+    }
+}
+
+@keyframes UpAndDown{
+    0%{
+        margin-top:0px;
+    }
+    50%{
+        margin-top:50px;
+    }
+    100%{
+        margin-top:0px;
+    }
+}
 html {
     min-height: 100%;
 
@@ -15,6 +50,11 @@ html {
         background: $whites;
         color: rgba(50, 50, 50, 0.8);
     }
+    #MyLogo img{
+        animation-name:UpAndDown;
+        animation-duration:3s;
+        animation-iteration-count: infinite;
+    }
 }
 
 #header {
@@ -28,7 +68,7 @@ html {
         > a {
             display: inline;
             color: white;
-            font-size: 3em;
+            font-size: 2.5em;
             padding: 20px;
             text-decoration-line: none;
             transition: all .3s;
