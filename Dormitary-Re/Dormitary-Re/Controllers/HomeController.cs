@@ -11,8 +11,8 @@ namespace Dormitary_Re.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        OrderModel orderModel = new OrderModel();
-        LoginModel loginMdel = new LoginModel();
+        readonly OrderModel _orderModel = new OrderModel();
+        readonly LoginModel _loginMdel = new LoginModel();
         [FilterPermission]
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace Dormitary_Re.Controllers
         [FilterPermission]
         public ActionResult Order()
         {
-            List<Order> OrderList = orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList();
+            List<Order> OrderList = _orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList();
             return View(OrderList);
         }
 
@@ -30,7 +30,7 @@ namespace Dormitary_Re.Controllers
         [FilterPermission]
         public ActionResult Submit(string Product, int HowMuch)
         {
-            if (orderModel.Submit(Session["Account"].ToString(), Product, HowMuch, (int)OrderingStatus.Ordering))
+            if (_orderModel.Submit(Session["Account"].ToString(), Product, HowMuch, (int)OrderingStatus.Ordering))
             {
                 return RedirectToAction("Order");
             }
@@ -51,10 +51,10 @@ namespace Dormitary_Re.Controllers
         enum OrderingStatus { Ordering = 1, NotOrdering = 0 }
         public ActionResult SetAllProductOrderingStatus()
         {
-            int FinalPrice = orderModel.GetFinalPrice(orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList(), (int)OrderingStatus.Ordering);
-            orderModel.SetAllOrdering((int)OrderingStatus.NotOrdering);
-            orderModel.InsertFinshOrder(Session["Account"].ToString(), FinalPrice);
-            orderModel.UpdateFinishedOrders(orderModel.GetLatestIDFromFinishOrder());
+            int FinalPrice = _orderModel.GetFinalPrice(_orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList(), (int)OrderingStatus.Ordering);
+            _orderModel.SetAllOrdering((int)OrderingStatus.NotOrdering);
+            _orderModel.InsertFinshOrder(Session["Account"].ToString(), FinalPrice);
+            _orderModel.UpdateFinishedOrders(_orderModel.GetLatestIDFromFinishOrder());
             return RedirectToAction("Order");
         }
 
@@ -63,8 +63,8 @@ namespace Dormitary_Re.Controllers
         {
             OrderAndHistory oah = new OrderAndHistory
             {
-                order = orderModel.GetOrderList((int)OrderingStatus.NotOrdering).ToList(),
-                finishorder = orderModel.GetFinishedOrdersList().ToList()
+                order = _orderModel.GetOrderList((int)OrderingStatus.NotOrdering).ToList(),
+                finishorder = _orderModel.GetFinishedOrdersList().ToList()
             };
             oah.finishorder = oah.finishorder.OrderByDescending(m => m.finishtime);
             return View(oah);
@@ -75,7 +75,7 @@ namespace Dormitary_Re.Controllers
         public ActionResult Login(string account, string pwd)
         {
             Session.Clear();
-            if (loginMdel.Login(account, pwd))
+            if (_loginMdel.Login(account, pwd))
             {
                 Session["account"] = account;
                 return RedirectToAction("Index");
