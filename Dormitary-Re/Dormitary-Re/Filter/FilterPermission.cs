@@ -10,7 +10,7 @@ namespace Dormitary_Re.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext.HttpContext.Session["account"] ==null)
+            if (filterContext.HttpContext.Session != null && filterContext.HttpContext.Session["account"] ==null)
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary
