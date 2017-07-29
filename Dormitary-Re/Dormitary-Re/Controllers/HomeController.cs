@@ -51,9 +51,9 @@ namespace Dormitary_Re.Controllers
         enum OrderingStatus { Ordering = 1, NotOrdering = 0 }
         public ActionResult SetAllProductOrderingStatus()
         {
-            int FinalPrice = _orderModel.GetFinalPrice(_orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList(), (int)OrderingStatus.Ordering);
+            int finalPrice = _orderModel.GetFinalPrice(_orderModel.GetOrderList((int)OrderingStatus.Ordering).ToList(), (int)OrderingStatus.Ordering);
             _orderModel.SetAllOrdering((int)OrderingStatus.NotOrdering);
-            _orderModel.InsertFinshOrder(Session["Account"].ToString(), FinalPrice);
+            _orderModel.InsertFinshOrder(Session["Account"].ToString(), finalPrice);
             _orderModel.UpdateFinishedOrders(_orderModel.GetLatestIDFromFinishOrder());
             return RedirectToAction("Order");
         }
@@ -61,13 +61,13 @@ namespace Dormitary_Re.Controllers
         [FilterPermission]
         public ActionResult HistoryPage()
         {
-            OrderAndHistory oah = new OrderAndHistory
+            OrderAndHistory orderAndHistory = new OrderAndHistory
             {
                 order = _orderModel.GetOrderList((int)OrderingStatus.NotOrdering).ToList(),
                 finishorder = _orderModel.GetFinishedOrdersList().ToList()
             };
-            oah.finishorder = oah.finishorder.OrderByDescending(m => m.finishtime);
-            return View(oah);
+            orderAndHistory.finishorder = orderAndHistory.finishorder.OrderByDescending(m => m.finishtime);
+            return View(orderAndHistory);
         }
 
 
