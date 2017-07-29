@@ -11,36 +11,33 @@ namespace Dormitary_Re.Models
     {
         bool Login(string account, string password);
     }
-
     public class LoginModel : ILoginCertify
     {
         public bool Login(string account, string password)
         {
-            object Success;
+            object success;
             using (var cn = new SqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
                 string sqlCommand = "Select * from account where account = @account and password = @password";
-                var Login = new Login()
+                var login = new Login()
                 {
-                    account = account,
-                    password = password
+                    Account = account,
+                    Password = password
                 };
-                Success = cn.QueryFirstOrDefault(sqlCommand, Login);
+                success = cn.QueryFirstOrDefault(sqlCommand, login);
             }
-            if (Success != null)
-            {
+            if (success != null)
                 return true;
-            }
             return false;
         }
     }
 
     public class Login
     {
-        public string account { get; set; }
-        public string password { get; set; }
-        public string email { get; set; }
+        public string Account { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public string NickName { get; set; }
-        public int money { get; set; }
+        public int Money { get; set; }
     }
 }
